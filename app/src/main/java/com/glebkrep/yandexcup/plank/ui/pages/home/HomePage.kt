@@ -14,7 +14,7 @@ import com.google.accompanist.permissions.rememberPermissionState
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun HomePage(outterNavController: NavController) {
+fun HomePage(outterNavController: NavController,toCameraActivity:()->(Unit)) {
     val cameraPermissionState =
         rememberPermissionState(android.Manifest.permission.CAMERA)
 
@@ -43,7 +43,7 @@ fun HomePage(outterNavController: NavController) {
         ) {
             Text("Разрешение предоставлено")
             Button(onClick = {
-                outterNavController.navigate(Screen.Camera.route)
+                toCameraActivity.invoke()
             }) {
                 Text(text = "Начать тренировку")
             }

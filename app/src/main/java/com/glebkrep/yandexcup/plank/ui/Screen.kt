@@ -8,6 +8,5 @@ import com.glebkrep.yandexcup.plank.R
 
 sealed class Screen(val route: String) {
     object Home : Screen("Home")
-    object Camera : Screen("Camera")
 
 }

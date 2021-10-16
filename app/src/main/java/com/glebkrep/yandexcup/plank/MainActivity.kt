@@ -1,5 +1,6 @@
 package com.glebkrep.yandexcup.plank
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,7 +10,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.glebkrep.yandexcup.plank.ui.Screen
-import com.glebkrep.yandexcup.plank.ui.pages.camera.CameraPage
 import com.glebkrep.yandexcup.plank.ui.pages.home.HomePage
 import com.glebkrep.yandexcup.plank.ui.theme.YogaTheme
 
@@ -37,8 +37,9 @@ class MainActivity : ComponentActivity() {
                         navController = mainNavController,
                         startDestination = Screen.Home.route
                     ) {
-                        composable(Screen.Home.route) { HomePage(mainNavController) }
-                        composable(Screen.Camera.route) { CameraPage(mainNavController) }
+                        composable(Screen.Home.route) { HomePage(mainNavController){
+                            startActivity(Intent(this@MainActivity,CameraActivity::class.java))
+                        } }
 
                     }
                 }

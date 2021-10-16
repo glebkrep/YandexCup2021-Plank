@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.util.Patterns
-import com.glebkrep.yandexcup.plank.poseDetection.data.BreathingItem
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.SimpleDateFormat
@@ -16,10 +15,6 @@ fun Context.getActivity(): Activity? = when (this) {
     else -> null
 }
 
-val BreathingItem.durationMillis: Long
-    get() {
-        return endTimestamp - startTimestamp
-    }
 
 fun Long.millisToSeconds():String{
     val seconds = this.toDouble()/1000f
