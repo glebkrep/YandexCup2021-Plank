@@ -1,4 +1,4 @@
-package com.glebkrep.yandexcup.plank
+package com.glebkrep.yandexcup.plank.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,9 +9,10 @@ import androidx.compose.material.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.glebkrep.yandexcup.plank.ui.Screen
-import com.glebkrep.yandexcup.plank.ui.pages.home.HomePage
-import com.glebkrep.yandexcup.plank.ui.pages.plankExercise.PlankExercisePage
+import com.glebkrep.yandexcup.plank.ui.plank.PlankActivity
+import com.glebkrep.yandexcup.plank.ui.home.pages.Screen
+import com.glebkrep.yandexcup.plank.ui.home.pages.home.HomePage
+import com.glebkrep.yandexcup.plank.ui.home.pages.plankExercise.PlankExercisePage
 import com.glebkrep.yandexcup.plank.ui.theme.YogaTheme
 
 //Даша знает, что зарядка очень полезна, и выполняет ее исправно каждый день.
@@ -27,7 +28,7 @@ import com.glebkrep.yandexcup.plank.ui.theme.YogaTheme
 //- фиксировать время стояния "в планке",
 //- вести учет попыток и показывать их в списке с возможностью добавить новую попытку.
 
-class MainActivity : ComponentActivity() {
+class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -45,7 +46,7 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Screen.PlankExercise.route) {
                             PlankExercisePage(onStartNewExercise = {
-                                startActivity(Intent(this@MainActivity, PlankActivity::class.java))
+                                startActivity(Intent(this@HomeActivity, PlankActivity::class.java))
                             })
                         }
                     }

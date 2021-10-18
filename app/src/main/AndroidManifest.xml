@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Plank">
         <activity
-            android:name=".PlankActivity"
+            android:name=".ui.plank.PlankActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.home.HomeActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Plank.NoActionBar">

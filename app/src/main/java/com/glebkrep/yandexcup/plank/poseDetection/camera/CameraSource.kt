@@ -91,7 +91,7 @@ class CameraSource(
                 yuvConverter.yuvToRgb(image, imageBitmap)
                 // Create rotated version for portrait display
                 val rotateMatrix = Matrix()
-                rotateMatrix.postRotate(90.0f)
+                rotateMatrix.postRotate(-90.0f)
 
                 val rotatedBitmap = Bitmap.createBitmap(
                     imageBitmap, 0, 0, PREVIEW_WIDTH, PREVIEW_HEIGHT,
@@ -147,10 +147,9 @@ class CameraSource(
         for (cameraId in cameraManager.cameraIdList) {
             val characteristics = cameraManager.getCameraCharacteristics(cameraId)
 
-            // We don't use a front facing camera in this sample.
             val cameraDirection = characteristics.get(CameraCharacteristics.LENS_FACING)
             if (cameraDirection != null &&
-                cameraDirection == CameraCharacteristics.LENS_FACING_FRONT
+                cameraDirection == CameraCharacteristics.LENS_FACING_BACK
             ) {
                 continue
             }
@@ -231,8 +230,45 @@ class CameraSource(
             listener?.onFPSListener(framesPerSecond)
         }
         listener?.onDetectedInfo(person?.score, classificationResult)
+        plankStartEnd(classificationResult,person?.score)
         person?.let {
             visualize(it, bitmap)
+        }
+    }
+
+    private fun plankStartEnd(classificationResult:List<Pair<String, Float>>?,personScore: Float?){
+        val plankScore = classificationResult?.firstOrNull { it.first=="plank" }?.second
+        if (plankScore!=null){
+            if (plankScore>0.95f && (personScore?:0f)>0.60f){
+                isPlank()
+            }
+            else{
+                isNotPlank()
+            }
+        }
+        else{
+            isNotPlank()
+        }
+    }
+
+    var isPlankInProgress = false
+    private fun isPlank(){
+        if (isPlankInProgress){
+            return
+        }
+        else{
+            listener?.plankStarted(System.currentTimeMillis())
+            isPlankInProgress = true
+        }
+    }
+
+    private fun isNotPlank(){
+        if (isPlankInProgress){
+            isPlankInProgress = false
+            listener?.plankEnded(System.currentTimeMillis())
+        }
+        else{
+            return
         }
     }
 
@@ -242,7 +278,6 @@ class CameraSource(
         if (person.score > MIN_CONFIDENCE) {
             outputBitmap = VisualizationUtils.drawBodyKeypoints(bitmap, person)
         }
-
         val holder = surfaceView.holder
         val surfaceCanvas = holder.lockCanvas()
         surfaceCanvas?.let { canvas ->
@@ -290,5 +325,9 @@ class CameraSource(
         fun onFPSListener(fps: Int)
 
         fun onDetectedInfo(personScore: Float?, poseLabels: List<Pair<String, Float>>?)
+
+        fun plankStarted(timestamp:Long)
+
+        fun plankEnded(timestamp: Long)
     }
 }

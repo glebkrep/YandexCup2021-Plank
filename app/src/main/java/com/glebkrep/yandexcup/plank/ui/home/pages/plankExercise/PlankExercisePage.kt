@@ -1,4 +1,4 @@
-package com.glebkrep.yandexcup.plank.ui.pages.plankExercise
+package com.glebkrep.yandexcup.plank.ui.home.pages.plankExercise
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.glebkrep.yandexcup.plank.repository.data.PlankTry
+import com.glebkrep.yandexcup.plank.data.PlankTry
 import com.glebkrep.yandexcup.plank.utils.millisToSeconds
 
 @Composable
@@ -57,7 +57,7 @@ fun PlankExercisePage(
                     Text(
                         text = "Нажмите на кнопку ниже и установите телефон так, чтобы вас было видно, " +
                                 "когда вы делаете упражнение.\n\n" +
-                                "Приложение само фиксирует начало и конец попыытки, вам нужно будет только" +
+                                "Приложение само фиксирует начало и конец попытки, вам нужно будет только" +
                                 " нажать 'завершить тренировку', когда вы устаните и решите закончить",
                         withPadding
                     )
@@ -87,10 +87,11 @@ fun TryItem(plankTry: PlankTry) {
     Row(
         Modifier
             .fillMaxWidth()
-            .border(2.dp, Color.Black)
             .padding(4.dp)
+            .border(2.dp, Color.Black)
+
     ) {
-        Text(text = "Попытка ${plankTry.id + 1}", Modifier.padding(8.dp))
-        Text(text = plankTry.tryLength.millisToSeconds(), Modifier.padding(8.dp))
+        Text(text = "Попытка ${plankTry.id}", Modifier.padding(8.dp))
+        Text(text = plankTry.tryTime.millisToSeconds(), Modifier.padding(8.dp))
     }
 }

@@ -1,4 +1,4 @@
-package com.glebkrep.yandexcup.plank.ui.pages.home
+package com.glebkrep.yandexcup.plank.ui.home.pages.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
