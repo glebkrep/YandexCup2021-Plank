@@ -21,10 +21,3 @@ fun Long.millisToSeconds():String{
     val decimal = BigDecimal(seconds).setScale(2, RoundingMode.HALF_EVEN)
     return "$decimal s"
 }
-
-fun Long.millisToHMS():String{
-    val time = SimpleDateFormat("HH:mm:ss").format(Date(this))
-    return time
-}
-
-fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()

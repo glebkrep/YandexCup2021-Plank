@@ -23,7 +23,7 @@ import com.glebkrep.yandexcup.plank.poseDetection.ml.PoseNet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CameraActivity : AppCompatActivity() {
+class PlankActivity : AppCompatActivity() {
 
     /** A [SurfaceView] for camera preview.   */
     private lateinit var surfaceView: SurfaceView
@@ -36,7 +36,7 @@ class CameraActivity : AppCompatActivity() {
     private var modelPos = 1
 
     /** Default device is GPU */
-    private var device = Device.CPU
+    private var device = Device.GPU
 
     private lateinit var tvScore: TextView
     private lateinit var tvFPS: TextView

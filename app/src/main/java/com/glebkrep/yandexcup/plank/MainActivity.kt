@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.glebkrep.yandexcup.plank.ui.Screen
 import com.glebkrep.yandexcup.plank.ui.pages.home.HomePage
+import com.glebkrep.yandexcup.plank.ui.pages.plankExercise.PlankExercisePage
 import com.glebkrep.yandexcup.plank.ui.theme.YogaTheme
 
 //Даша знает, что зарядка очень полезна, и выполняет ее исправно каждый день.
@@ -37,10 +38,16 @@ class MainActivity : ComponentActivity() {
                         navController = mainNavController,
                         startDestination = Screen.Home.route
                     ) {
-                        composable(Screen.Home.route) { HomePage(mainNavController){
-                            startActivity(Intent(this@MainActivity,CameraActivity::class.java))
-                        } }
-
+                        composable(Screen.Home.route) {
+                            HomePage() {
+                                mainNavController.navigate(Screen.PlankExercise.route)
+                            }
+                        }
+                        composable(Screen.PlankExercise.route) {
+                            PlankExercisePage(onStartNewExercise = {
+                                startActivity(Intent(this@MainActivity, PlankActivity::class.java))
+                            })
+                        }
                     }
                 }
             }

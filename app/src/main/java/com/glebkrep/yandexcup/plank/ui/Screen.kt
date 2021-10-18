@@ -8,5 +8,5 @@ import com.glebkrep.yandexcup.plank.R
 
 sealed class Screen(val route: String) {
     object Home : Screen("Home")
-
+    object PlankExercise:Screen("Plank Exercise")
 }
