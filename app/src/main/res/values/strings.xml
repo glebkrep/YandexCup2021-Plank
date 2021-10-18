@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Plank</string>
+    <string name="app_name">YandexCup.Plank</string>
 
     <string name="tfe_pe_tv_score">Score: %.2f</string>
     <string name="tfe_pe_tv_model">Model: </string>
