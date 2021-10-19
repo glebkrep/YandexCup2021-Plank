@@ -2,8 +2,16 @@
     <string name="app_name">YandexCup.Plank</string>
 
     <string name="tfe_pe_tv_score">Score: %.2f</string>
-    <string name="tfe_pe_tv_model">Model: </string>
-    <string name="tfe_pe_tv_fps">Fps: %d</string>
-    <string name="tfe_pe_tv_device">Device: </string>
     <string name="tfe_pe_tv_classification_value">- %s</string>
+    <string name="tries_list">Список попыток: </string>
+    <string name="tries_list_empty">Здесь будет отображен список ваших предыдущих попыток </string>
+    <string name="start_new_try">Начать новую тренировку</string>
+    <string name="guide_header">Как правильно работать с приложением:</string>
+    <string name="plank">Планка!</string>
+    <string name="app_how_to">Нажмите на кнопку ниже и установите телефон так, чтобы вас было видно,  когда вы делаете упражнение.\n\n Приложение само фиксирует начало и конец попытки, вам нужно будет только нажать \'завершить тренировку\', когда вы устаните и решите закончить</string>
+    <string name="morning_exercise">Зарядка</string>
+    <string name="permission_explanation">Для работы приложения нужно разрешение на доступ к камере</string>
+    <string name="grant_permission">Предоставить разрешение!</string>
+    <string name="permission_bad">Разрешение не было предоставлено, приложение не сможет работать...</string>
+    <string name="train_plank">Тренировка (Планка)</string>
 </resources>

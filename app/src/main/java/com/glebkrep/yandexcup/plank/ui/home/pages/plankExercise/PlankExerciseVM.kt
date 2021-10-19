@@ -3,7 +3,6 @@ package com.glebkrep.yandexcup.plank.ui.home.pages.plankExercise
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
 import com.glebkrep.yandexcup.plank.data.PlankTry
 import com.glebkrep.yandexcup.plank.data.PlankTryRepository
 import com.glebkrep.yandexcup.plank.data.PlankTryRoomDatabase

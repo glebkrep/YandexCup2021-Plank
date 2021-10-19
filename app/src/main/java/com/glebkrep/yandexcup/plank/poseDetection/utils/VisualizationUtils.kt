@@ -49,7 +49,7 @@ object VisualizationUtils {
             style = Paint.Style.FILL
         }
 
-        val output = input.copy(Bitmap.Config.ARGB_8888,true)
+        val output = input.copy(Bitmap.Config.ARGB_8888, true)
         val originalSizeCanvas = Canvas(output)
         bodyJoints.forEach {
             val pointA = person.keyPoints[it.first.position].coordinate

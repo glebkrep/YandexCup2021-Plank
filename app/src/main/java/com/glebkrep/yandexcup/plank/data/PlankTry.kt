@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "planktry_table")
 data class PlankTry(
     @PrimaryKey(autoGenerate = true)
-    var id:Int = 0,
+    var id: Int = 0,
     @ColumnInfo(name = "start_time")
-    val startTimestamp:Long,
+    val startTimestamp: Long,
     @ColumnInfo(name = "end_time")
-    val endTimestamp:Long,
+    val endTimestamp: Long,
     @ColumnInfo(name = "try_time")
-    val tryTime:Long = endTimestamp-startTimestamp
+    val tryTime: Long = endTimestamp - startTimestamp
 )

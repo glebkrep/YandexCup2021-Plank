@@ -13,8 +13,10 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.glebkrep.yandexcup.plank.R
 import com.glebkrep.yandexcup.plank.data.PlankTry
 import com.glebkrep.yandexcup.plank.utils.millisToSeconds
 
@@ -38,7 +40,7 @@ fun PlankExercisePage(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            Text("Планка!", withPadding)
+            Text(stringResource(R.string.plank), withPadding)
         }
         item {
             Column(
@@ -49,31 +51,28 @@ fun PlankExercisePage(
                 }
             ) {
                 Text(
-                    text = "Как правильно работать с приложением:",
+                    text = stringResource(R.string.guide_header),
                     withPadding,
                     color = Color.Blue
                 )
                 if (tries.isEmpty() || areRulesExpended) {
                     Text(
-                        text = "Нажмите на кнопку ниже и установите телефон так, чтобы вас было видно, " +
-                                "когда вы делаете упражнение.\n\n" +
-                                "Приложение само фиксирует начало и конец попытки, вам нужно будет только" +
-                                " нажать 'завершить тренировку', когда вы устаните и решите закончить",
+                        text = stringResource(id = R.string.app_how_to),
                         withPadding
                     )
                 }
                 Button(onClick = {
                     onStartNewExercise.invoke()
                 }, withPadding) {
-                    Text(text = "Начать новую тренировку")
+                    Text(text = stringResource(R.string.start_new_try))
                 }
             }
         }
         item {
             if (tries.isEmpty()) {
-                Text(text = "Здесь будет отображен список вашик предыдущих попыток ", withPadding)
+                Text(text = stringResource(R.string.tries_list_empty), withPadding)
             } else {
-                Text(text = "Список попыток: ", withPadding)
+                Text(text = stringResource(R.string.tries_list), withPadding)
             }
         }
         items(tries) {

@@ -3,9 +3,9 @@ package com.glebkrep.yandexcup.plank.poseDetection.ml
 import android.content.Context
 import android.graphics.*
 import android.os.SystemClock
+import com.glebkrep.yandexcup.plank.poseDetection.data.*
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
-import com.glebkrep.yandexcup.plank.poseDetection.data.*
 import org.tensorflow.lite.gpu.GpuDelegate
 import org.tensorflow.lite.support.common.FileUtil
 import org.tensorflow.lite.support.image.ImageProcessor
@@ -63,10 +63,6 @@ class MoveNet(private val interpreter: Interpreter, private var gpuDelegate: Gpu
                 gpuDelegate
             )
         }
-
-        // default to lightning.
-        fun create(context: Context, device: Device): MoveNet =
-            create(context, device, ModelType.Lightning)
     }
 
     private var cropRegion: RectF? = null

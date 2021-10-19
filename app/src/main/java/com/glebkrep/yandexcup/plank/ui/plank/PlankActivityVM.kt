@@ -9,8 +9,9 @@ import com.glebkrep.yandexcup.plank.data.PlankTryRoomDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PlankActivityVM(application: Application):AndroidViewModel(application) {
+class PlankActivityVM(application: Application) : AndroidViewModel(application) {
     private var plankTryRepository: PlankTryRepository? = null
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             plankTryRepository = PlankTryRepository(
@@ -19,14 +20,14 @@ class PlankActivityVM(application: Application):AndroidViewModel(application) {
         }
     }
 
-    private var plankStartTimestamp:Long? = null
+    private var plankStartTimestamp: Long? = null
 
-    fun plankStart(timestamp:Long){
+    fun plankStart(timestamp: Long) {
         plankStartTimestamp = timestamp
     }
 
-    fun plankEnd(timestamp: Long){
-        val plankStart = plankStartTimestamp?:return
+    fun plankEnd(timestamp: Long) {
+        val plankStart = plankStartTimestamp ?: return
         val plankTry = PlankTry(startTimestamp = plankStart, endTimestamp = timestamp)
         viewModelScope.launch(Dispatchers.IO) {
             plankTryRepository?.insert(plankTry)

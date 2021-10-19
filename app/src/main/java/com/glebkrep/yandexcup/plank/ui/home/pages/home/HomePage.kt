@@ -8,8 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.glebkrep.yandexcup.plank.R
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionRequired
 import com.google.accompanist.permissions.rememberPermissionState
@@ -28,22 +30,22 @@ fun HomePage(toPlankExercise: () -> (Unit)) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Зарядка", withPadding)
+        Text(text = stringResource(R.string.morning_exercise), withPadding)
         PermissionRequired(
             permissionState = cameraPermissionState,
             permissionNotGrantedContent = {
                 Text(
-                    "Для работы приложения нужно разрешение на доступ к камере",
+                    stringResource(R.string.permission_explanation),
                     withPadding,
                     textAlign = TextAlign.Center
                 )
                 Button(onClick = { cameraPermissionState.launchPermissionRequest() }, withPadding) {
-                    Text("Предоставить разрешение!")
+                    Text(stringResource(R.string.grant_permission))
                 }
             },
             permissionNotAvailableContent = {
                 Text(
-                    "Разрешение не было предоставлено, приложение не сможет работать...",
+                    stringResource(R.string.permission_bad),
                     withPadding, textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -52,7 +54,7 @@ fun HomePage(toPlankExercise: () -> (Unit)) {
             Button(onClick = {
                 toPlankExercise.invoke()
             }, withPadding) {
-                Text(text = "Тренировка (Планка)")
+                Text(text = stringResource(R.string.train_plank))
             }
         }
 

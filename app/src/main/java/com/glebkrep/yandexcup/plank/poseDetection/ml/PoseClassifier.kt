@@ -1,8 +1,8 @@
 package com.glebkrep.yandexcup.plank.poseDetection.ml
 
 import android.content.Context
-import org.tensorflow.lite.Interpreter
 import com.glebkrep.yandexcup.plank.poseDetection.data.Person
+import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.support.common.FileUtil
 
 class PoseClassifier(

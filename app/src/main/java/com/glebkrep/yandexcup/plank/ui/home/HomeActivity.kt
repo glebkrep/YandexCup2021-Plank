@@ -9,11 +9,11 @@ import androidx.compose.material.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.glebkrep.yandexcup.plank.ui.plank.PlankActivity
 import com.glebkrep.yandexcup.plank.ui.home.pages.Screen
 import com.glebkrep.yandexcup.plank.ui.home.pages.home.HomePage
 import com.glebkrep.yandexcup.plank.ui.home.pages.plankExercise.PlankExercisePage
-import com.glebkrep.yandexcup.plank.ui.theme.YogaTheme
+import com.glebkrep.yandexcup.plank.ui.plank.PlankActivity
+import com.glebkrep.yandexcup.plank.ui.theme.PlankTheme
 
 //Даша знает, что зарядка очень полезна, и выполняет ее исправно каждый день.
 //Иногда Даше кажется, что она делает зарядку недостаточно энергично,
@@ -32,7 +32,7 @@ class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            YogaTheme {
+            PlankTheme {
                 Surface(color = MaterialTheme.colors.background) {
                     val mainNavController = rememberNavController()
                     NavHost(

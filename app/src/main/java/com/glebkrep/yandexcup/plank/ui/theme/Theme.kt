@@ -27,7 +27,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun YogaTheme(
+fun PlankTheme(
     darkTheme: Boolean = false,
     content: @Composable() () -> Unit
 ) {

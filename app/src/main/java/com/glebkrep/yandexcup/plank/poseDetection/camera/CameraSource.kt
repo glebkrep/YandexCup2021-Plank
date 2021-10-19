@@ -13,15 +13,15 @@ import android.hardware.camera2.CameraManager
 import android.media.ImageReader
 import android.os.Handler
 import android.os.HandlerThread
-import android.util.Log
 import android.view.Surface
 import android.view.SurfaceView
-import kotlinx.coroutines.suspendCancellableCoroutine
-import com.glebkrep.yandexcup.plank.poseDetection.utils.VisualizationUtils
-import com.glebkrep.yandexcup.plank.poseDetection.utils.YuvToRgbConverter
 import com.glebkrep.yandexcup.plank.poseDetection.data.Person
 import com.glebkrep.yandexcup.plank.poseDetection.ml.PoseClassifier
 import com.glebkrep.yandexcup.plank.poseDetection.ml.PoseDetector
+import com.glebkrep.yandexcup.plank.poseDetection.utils.VisualizationUtils
+import com.glebkrep.yandexcup.plank.poseDetection.utils.YuvToRgbConverter
+import com.glebkrep.yandexcup.plank.utils.Debug
+import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -34,10 +34,7 @@ class CameraSource(
     companion object {
         private const val PREVIEW_WIDTH = 640
         private const val PREVIEW_HEIGHT = 480
-
-        /** Threshold for confidence score. */
         private const val MIN_CONFIDENCE = .2f
-        private const val TAG = "Camera Source"
     }
 
     private val lock = Any()
@@ -46,30 +43,23 @@ class CameraSource(
     private var yuvConverter: YuvToRgbConverter = YuvToRgbConverter(surfaceView.context)
     private lateinit var imageBitmap: Bitmap
 
-    /** Frame count that have been processed so far in an one second interval to calculate FPS. */
     private var fpsTimer: Timer? = null
     private var frameProcessedInOneSecondInterval = 0
     private var framesPerSecond = 0
 
-    /** Detects, characterizes, and connects to a CameraDevice (used for all camera operations) */
     private val cameraManager: CameraManager by lazy {
         val context = surfaceView.context
         context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     }
 
-    /** Readers used as buffers for camera still shots */
     private var imageReader: ImageReader? = null
 
-    /** The [CameraDevice] that will be opened in this fragment */
     private var camera: CameraDevice? = null
 
-    /** Internal reference to the ongoing [CameraCaptureSession] configured with our parameters */
     private var session: CameraCaptureSession? = null
 
-    /** [HandlerThread] where all buffer reading operations run */
     private var imageReaderThread: HandlerThread? = null
 
-    /** [Handler] corresponding to [imageReaderThread] */
     private var imageReaderHandler: Handler? = null
     private var cameraId: String = ""
 
@@ -230,44 +220,43 @@ class CameraSource(
             listener?.onFPSListener(framesPerSecond)
         }
         listener?.onDetectedInfo(person?.score, classificationResult)
-        plankStartEnd(classificationResult,person?.score)
+        plankStartEnd(classificationResult, person?.score)
         person?.let {
             visualize(it, bitmap)
         }
     }
 
-    private fun plankStartEnd(classificationResult:List<Pair<String, Float>>?,personScore: Float?){
-        val plankScore = classificationResult?.firstOrNull { it.first=="plank" }?.second
-        if (plankScore!=null){
-            if (plankScore>0.95f && (personScore?:0f)>0.60f){
+    private fun plankStartEnd(
+        classificationResult: List<Pair<String, Float>>?,
+        personScore: Float?
+    ) {
+        val plankScore = classificationResult?.firstOrNull { it.first == "plank" }?.second
+        if (plankScore != null) {
+            if (plankScore > 0.95f && (personScore ?: 0f) > 0.60f) {
                 isPlank()
-            }
-            else{
+            } else {
                 isNotPlank()
             }
-        }
-        else{
+        } else {
             isNotPlank()
         }
     }
 
     var isPlankInProgress = false
-    private fun isPlank(){
-        if (isPlankInProgress){
+    private fun isPlank() {
+        if (isPlankInProgress) {
             return
-        }
-        else{
+        } else {
             listener?.plankStarted(System.currentTimeMillis())
             isPlankInProgress = true
         }
     }
 
-    private fun isNotPlank(){
-        if (isPlankInProgress){
+    private fun isNotPlank() {
+        if (isPlankInProgress) {
             isPlankInProgress = false
             listener?.plankEnded(System.currentTimeMillis())
-        }
-        else{
+        } else {
             return
         }
     }
@@ -317,7 +306,7 @@ class CameraSource(
             imageReaderThread = null
             imageReaderHandler = null
         } catch (e: InterruptedException) {
-            Log.d(TAG, e.message.toString())
+            Debug.log(e.message)
         }
     }
 
@@ -326,7 +315,7 @@ class CameraSource(
 
         fun onDetectedInfo(personScore: Float?, poseLabels: List<Pair<String, Float>>?)
 
-        fun plankStarted(timestamp:Long)
+        fun plankStarted(timestamp: Long)
 
         fun plankEnded(timestamp: Long)
     }

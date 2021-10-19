@@ -15,13 +15,11 @@ import com.glebkrep.yandexcup.plank.poseDetection.data.Device
 import com.glebkrep.yandexcup.plank.poseDetection.ml.ModelType
 import com.glebkrep.yandexcup.plank.poseDetection.ml.MoveNet
 import com.glebkrep.yandexcup.plank.poseDetection.ml.PoseClassifier
-import com.glebkrep.yandexcup.plank.poseDetection.ml.PoseNet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PlankActivity : AppCompatActivity() {
 
-    /** A [SurfaceView] for camera preview.   */
     private lateinit var surfaceView: SurfaceView
 
     private var device = Device.CPU
@@ -29,7 +27,6 @@ class PlankActivity : AppCompatActivity() {
     private lateinit var tvScore: TextView
     private lateinit var tvIsPlank: TextView
     private lateinit var btnStop: Button
-
 
     private lateinit var tvClassificationValue1: TextView
     private lateinit var tvClassificationValue2: TextView
